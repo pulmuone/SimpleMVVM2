@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SimpleMVVM"
+             x:Class="SimpleMVVM.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:EmpViewModel/>
+    </ContentPage.BindingContext>
+    
+    <StackLayout>
+        <Label Text="ID" />
+        <Entry Placeholder="EmpID" 
+               x:Name="EmpId"
+               Text="{Binding EmpId}"
+               ReturnCommand="{Binding ReturnValueCommand}"/>
+        <Label Text="Name"/>
+        
+        <Entry Placeholder="Name"  Text="{Binding EmpName}"/>
+
+        <Button Text="입력"
+                 Command="{Binding SendCommand}"/> 
+
+        <Label Text="Result : "/>
+        <Label Text="{Binding Result}"/>
+
+        <ListView
+            HorizontalOptions="Fill" 
+            ItemsSource="{Binding EmpList}" 
+            SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Label Text="{Binding EmpId}" />
+                            <Label Grid.Column="1" Text="{Binding EmpName}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+    
+</ContentPage>

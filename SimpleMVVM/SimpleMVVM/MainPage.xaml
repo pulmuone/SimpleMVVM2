@@ -32,7 +32,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-                            <Label Text="{Binding EmpId}" />
+                            <Label Grid.Column="0" Text="{Binding EmpId}" />
                             <Label Grid.Column="1" Text="{Binding EmpName}" />
                         </Grid>
                     </ViewCell>

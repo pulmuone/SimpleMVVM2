@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMVVM.Android", "Simpl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMVVM.iOS", "SimpleMVVM\SimpleMVVM.iOS\SimpleMVVM.iOS.csproj", "{B6754981-819C-4959-B58A-2E535342D1D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMVVM", "SimpleMVVM\SimpleMVVM\SimpleMVVM.csproj", "{EC79F40B-A642-4CC5-BAAF-97EEF57ACC43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMVVM", "SimpleMVVM\SimpleMVVM\SimpleMVVM.csproj", "{EC79F40B-A642-4CC5-BAAF-97EEF57ACC43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

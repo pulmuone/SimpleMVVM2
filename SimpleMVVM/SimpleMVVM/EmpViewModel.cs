@@ -12,14 +12,18 @@ namespace SimpleMVVM
 {
     public class EmpViewModel : INotifyPropertyChanged
     {
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ObservableCollection<EmpModel> _empList = new ObservableCollection<EmpModel>();
+        //public ObservableCollection<EmpModel> EmpList { get; } = new ObservableCollection<EmpModel>();
+
 
         private string _result;
 
         private string _empId;
         private string _empName;
+
 
         public ICommand SendCommand { get; } //생성자에서만 new할꺼면 private set없어도 된다.
 
@@ -30,6 +34,8 @@ namespace SimpleMVVM
             SendCommand = new Command(() => Send());
             ReturnValueCommand = new Command(() => Return());
             EmpId = "1234";
+
+            //EmpList = new ObservableCollection<EmpModel>();
         }
 
         private void Return()
@@ -41,18 +47,34 @@ namespace SimpleMVVM
         {
             Result = string.Format("ID : {0}, Name : {1}", EmpId, EmpName);
 
-            //List<EmpModel> _list = new List<EmpModel>();
+            EmpList.Add(new EmpModel
+            {
+                EmpId = "1",
+                EmpName = "A"
+            }
+            );
 
-            EmpList.Clear();
-            //EmpList = new ObservableCollection<EmpModel>(_list);
-
+            //EmpList = new ObservableCollection<EmpModel>();
 
             EmpList.Add(new EmpModel
-                {
-                    EmpId = this.EmpId,
-                    EmpName = this.EmpName
-                }
+            {
+                EmpId = "2",
+                EmpName = "B"
+            }
             );
+
+            //NotifyPropertyChanged("EmpList");
+            
+
+            //EmpList.Clear();
+            //EmpList = new ObservableCollection<EmpModel>(_list);
+
+            //EmpList.Add(new EmpModel
+            //    {
+            //        EmpId = this.EmpId,
+            //        EmpName = this.EmpName
+            //    }
+            //);
         }
 
 
@@ -109,16 +131,20 @@ namespace SimpleMVVM
 
             set
             {
-                if(_empList == value) return;
+                if (_empList == value) return;
                 _empList = value;
 
                 NotifyPropertyChanged();
-                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EmpList"));
             }
         }
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
+            //if(PropertyChanged != null)
+            //{
+            //    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            //}
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

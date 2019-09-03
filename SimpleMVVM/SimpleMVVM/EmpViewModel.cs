@@ -4,26 +4,23 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-
+using System.Linq;
 namespace SimpleMVVM
 {
     public class EmpViewModel : INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ObservableCollection<EmpModel> _empList = new ObservableCollection<EmpModel>();
-        //public ObservableCollection<EmpModel> EmpList { get; } = new ObservableCollection<EmpModel>();
-
 
         private string _result;
 
         private string _empId;
         private string _empName;
 
+        private EmpModel _selectedItem;
 
         public ICommand SendCommand { get; } //생성자에서만 new할꺼면 private set없어도 된다.
 
@@ -45,29 +42,16 @@ namespace SimpleMVVM
 
         private void Send()
         {
-            Result = string.Format("ID : {0}, Name : {1}", EmpId, EmpName);
+            //Result = string.Format("ID : {0}, Name : {1}", EmpId, EmpName);
 
-            EmpList.Add(new EmpModel
+
+            for (int i = 0; i < 100; i++)
             {
-                EmpId = "1",
-                EmpName = "A"
+                EmpList.Add(new EmpModel { EmpId = i.ToString(), EmpName = "test", Addr = "addr", Age = 12, Money = 5000 });
             }
-            );
 
-            //EmpList = new ObservableCollection<EmpModel>();
 
-            EmpList.Add(new EmpModel
-            {
-                EmpId = "2",
-                EmpName = "B"
-            }
-            );
-
-            //NotifyPropertyChanged("EmpList");
-            
-
-            //EmpList.Clear();
-            //EmpList = new ObservableCollection<EmpModel>(_list);
+            SelectedItem = EmpList.Skip(2).FirstOrDefault();
 
             //EmpList.Add(new EmpModel
             //    {
@@ -91,7 +75,6 @@ namespace SimpleMVVM
                 //{
                 //    PropertyChanged(this, new PropertyChangedEventArgs("Result"));
                 //}
-                
             }
 
             get { return _result;}
@@ -146,6 +129,21 @@ namespace SimpleMVVM
             //}
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public EmpModel SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                }
+            }
         }
     }
 }

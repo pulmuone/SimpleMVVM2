@@ -18,5 +18,23 @@ namespace SimpleMVVM
             this.EmpId.CursorPosition = 2;
             this.EmpId.SelectionLength = 2;
         }
+
+        private void MoveButton_Clicked(object sender, EventArgs e)
+        {
+            //collectionView.ScrollTo(30);
+
+            //collectionView.SelectedItem = new EmpModel { EmpId = "50", EmpName = "test", Addr = "addr", Age = 12, Money = 5000 };
+
+        }
+
+        private void Entry_Focused(object sender, FocusEventArgs e)
+        {
+            Console.WriteLine(collectionView.SelectedItem);
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Console.WriteLine("=========================== test");
+        }
     }
 }

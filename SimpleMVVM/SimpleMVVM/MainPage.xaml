@@ -7,7 +7,25 @@
     <ContentPage.BindingContext>
         <local:EmpViewModel/>
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
     <StackLayout>
         <Label Text="ID" />
         <Entry Placeholder="EmpID" 
@@ -16,30 +34,79 @@
                ReturnCommand="{Binding ReturnValueCommand}"/>
         <Label Text="Name"/>
         
-        <Entry Placeholder="Name"  Text="{Binding EmpName}"/>
+        <Entry Placeholder="Name" Text="{Binding EmpName}"/>
 
-        <Button Text="입력"
-                 Command="{Binding SendCommand}"/> 
+        <Button Text="입력" Command="{Binding SendCommand}"/>
+
+        <Button Text="이동" x:Name="moveButton" Clicked="MoveButton_Clicked"/>
 
         <Label Text="Result : "/>
         <Label Text="{Binding Result}"/>
 
-        <ListView
-            HorizontalOptions="Fill" 
-            ItemsSource="{Binding EmpList}" 
-            SeparatorVisibility="Default">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid>
-                            <Label Grid.Column="0" Text="{Binding EmpId}" />
-                            <Entry Grid.Column="1" Text="{Binding EmpName}" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ScrollView Orientation="Horizontal"
+            HorizontalScrollBarVisibility="Always"
+            VerticalScrollBarVisibility="Always"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="scrollView">
 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"
+                      RowSpacing="0" 
+                      ColumnSpacing="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="사번" Grid.Row="0" Grid.Column="0" x:Name="H0" />
+                    <Label Text="이름" Grid.Row="0" Grid.Column="1" x:Name="H1" />
+                    <Label Text="주소" Grid.Row="0" Grid.Column="2" x:Name="H2" />
+                    <Label Text="나이" Grid.Row="0" Grid.Column="3" x:Name="H3" />
+                </Grid>
+
+                <CollectionView 
+                    x:Name="collectionView"
+                    Grid.Row="1"
+                    SelectionMode="Single"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand" 
+                    SelectedItem="{Binding SelectedItem}"
+                    ItemsSource="{Binding EmpList}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                                <Grid ColumnSpacing="0" RowSpacing="0" HeightRequest="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding EmpId}">
+                                    <!--<Label.GestureRecognizers>
+                                        <TapGestureRecognizer  NumberOfTapsRequired="2" Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>-->
+                                </Label>
+                                <Label Grid.Column="1" Text="{Binding EmpName}" />
+                                    <Label Grid.Column="2" Text="{Binding Addr}" Focused="Entry_Focused" />
+                                    <Label Grid.Column="3" Text="{Binding Age}" />
+                                </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                Tapped="TapGestureRecognizer_Tapped"/>
+                    </CollectionView.GestureRecognizers>
+                </CollectionView>
+            </Grid>
+        </ScrollView>
     </StackLayout>
     
 </ContentPage>

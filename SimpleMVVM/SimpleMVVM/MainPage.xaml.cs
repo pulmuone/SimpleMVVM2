@@ -29,12 +29,35 @@ namespace SimpleMVVM
 
         private void Entry_Focused(object sender, FocusEventArgs e)
         {
-            Console.WriteLine(collectionView.SelectedItem);
+            Console.WriteLine(e.ToString());
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             Console.WriteLine("=========================== test");
         }
+
+        private void CollectionView_Focused(object sender, FocusEventArgs e)
+        {
+            Console.WriteLine(((CollectionView)sender).SelectedItem);
+        }
+
+        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.WriteLine(((CollectionView)sender).SelectedItem);
+            Console.WriteLine(e.CurrentSelection);
+
+            string previous = (e.PreviousSelection.FirstOrDefault() as EmpModel)?.EmpId;
+            string current = (e.CurrentSelection.FirstOrDefault() as EmpModel)?.EmpId;
+
+            this.collectionView.ScrollTo(30, 0, ScrollToPosition.Start, false);
+        }
+
+        private void CollectionView_ScrollToRequested(object sender, ScrollToRequestEventArgs e)
+        {
+            
+            
+            Console.WriteLine("ScrollToRequested : " + e.Index);
+         }
     }
 }

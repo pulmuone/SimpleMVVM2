@@ -45,6 +45,7 @@ namespace SimpleMVVM
             //Result = string.Format("ID : {0}, Name : {1}", EmpId, EmpName);
 
 
+            EmpList.Clear();
             for (int i = 0; i < 100; i++)
             {
                 EmpList.Add(new EmpModel { EmpId = i.ToString(), EmpName = "test", Addr = "addr", Age = 12, Money = 5000 });

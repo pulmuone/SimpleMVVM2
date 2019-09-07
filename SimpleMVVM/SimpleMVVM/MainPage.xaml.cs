@@ -15,8 +15,9 @@ namespace SimpleMVVM
 
             //BindingContext = new EmpViewModel();
 
-            this.EmpId.CursorPosition = 2;
-            this.EmpId.SelectionLength = 2;
+            //this.EmpId.CursorPosition = 2;
+            //this.EmpId.SelectionLength = 2;
+           
         }
 
         private void MoveButton_Clicked(object sender, EventArgs e)
@@ -59,5 +60,15 @@ namespace SimpleMVVM
             
             Console.WriteLine("ScrollToRequested : " + e.Index);
          }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void H0_Clicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("aa");
+        }
     }
 }

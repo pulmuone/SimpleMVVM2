@@ -9,7 +9,7 @@ using Xamarin.Forms;
 using System.Linq;
 namespace SimpleMVVM
 {
-    public class EmpViewModel : INotifyPropertyChanged
+    public class EmpViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,13 +26,26 @@ namespace SimpleMVVM
 
         public ICommand ReturnValueCommand { get; }
 
+        public ICommand SortedCommand { get; set; }
+
         public EmpViewModel()
         {
             SendCommand = new Command(() => Send());
             ReturnValueCommand = new Command(() => Return());
+            SortedCommand = new Command<DataGridHeader>(Sorted);
+
             EmpId = "1234";
 
             //EmpList = new ObservableCollection<EmpModel>();
+        }
+
+        private void Sorted(DataGridHeader e)
+        {
+            Console.WriteLine(e.SortFlag);
+            Console.WriteLine(e.SortingEnabled);
+            Console.WriteLine(e.FieldName);
+
+            Console.WriteLine("a");
         }
 
         private void Return()

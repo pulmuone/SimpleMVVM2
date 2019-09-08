@@ -12,12 +12,13 @@ namespace SimpleMVVM
         public MainPage()
         {
             InitializeComponent();
-
             //BindingContext = new EmpViewModel();
+            //this.H0.ViewModel = (this.BindingContext as EmpViewModel);
+
 
             //this.EmpId.CursorPosition = 2;
             //this.EmpId.SelectionLength = 2;
-           
+
         }
 
         private void MoveButton_Clicked(object sender, EventArgs e)
@@ -48,8 +49,8 @@ namespace SimpleMVVM
             Console.WriteLine(((CollectionView)sender).SelectedItem);
             Console.WriteLine(e.CurrentSelection);
 
-            string previous = (e.PreviousSelection.FirstOrDefault() as EmpModel)?.EmpId;
-            string current = (e.CurrentSelection.FirstOrDefault() as EmpModel)?.EmpId;
+            //int previous = (e.PreviousSelection.FirstOrDefault() as EmpModel)?.EmpId;
+            //int current = (e.CurrentSelection.FirstOrDefault() as EmpModel)?.EmpId;
 
             this.collectionView.ScrollTo(30, 0, ScrollToPosition.Start, false);
         }

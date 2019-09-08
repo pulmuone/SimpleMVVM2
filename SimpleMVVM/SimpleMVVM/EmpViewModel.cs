@@ -7,13 +7,16 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
+using SimpleMVVM.Sorting;
+using SimpleMVVM.Controls;
+
 namespace SimpleMVVM
 {
-    public class EmpViewModel : ViewModelBase, INotifyPropertyChanged
+    public class EmpViewModel : ViewModelBase, INotifyPropertyChanged, IViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<EmpModel> _empList = new ObservableCollection<EmpModel>();
+        private ObservableRangeCollection<EmpModel> _empList = new ObservableRangeCollection<EmpModel>();
 
         private string _result;
 
@@ -22,11 +25,13 @@ namespace SimpleMVVM
 
         private EmpModel _selectedItem;
 
+        private SortData _sortData = new SortData();
+
         public ICommand SendCommand { get; } //생성자에서만 new할꺼면 private set없어도 된다.
 
         public ICommand ReturnValueCommand { get; }
 
-        public ICommand SortedCommand { get; set; }
+        //public ICommand SortedCommand { get; set; }
 
         public EmpViewModel()
         {
@@ -46,6 +51,38 @@ namespace SimpleMVVM
             Console.WriteLine(e.FieldName);
 
             Console.WriteLine("a");
+
+
+
+            //List<EmpModel> lst = _empList.ToList<EmpModel>();
+            List<EmpModel> lst;
+
+            SortingOrder sortMethod;
+            if(e.SortFlag ==  SortingOrder.None || e.SortFlag == SortingOrder.Ascendant)
+            {
+                sortMethod = SortingOrder.Descendant;
+                lst = EmpList.OrderBy(x => x.EmpId).ToList() ;
+            }
+            else
+            {
+                sortMethod = SortingOrder.Ascendant;
+                lst = EmpList.OrderByDescending(x => x.EmpId).ToList();
+            }
+            e.SortFlag = sortMethod;
+            
+
+            //_sortData.SortList(ref lst, e.SortFlag, e.FieldName);
+
+            //foreach (var item in _empList)
+            //{
+            //    Console.WriteLine(item.EmpId);
+            //}
+
+            //EmpList = new ObservableCollection<EmpModel>(lst);
+
+            EmpList.Clear();
+            EmpList.AddRange(lst);
+
         }
 
         private void Return()
@@ -61,7 +98,7 @@ namespace SimpleMVVM
             EmpList.Clear();
             for (int i = 0; i < 100; i++)
             {
-                EmpList.Add(new EmpModel { EmpId = i.ToString(), EmpName = "test", Addr = "addr", Age = 12, Money = 5000 });
+                EmpList.Add(new EmpModel { EmpId = i, EmpName = "test", Addr = "addr", Age = 12, Money = 5000 });
             }
 
 
@@ -122,7 +159,7 @@ namespace SimpleMVVM
             get { return _empName; }
         }
 
-        public ObservableCollection<EmpModel> EmpList
+        public ObservableRangeCollection<EmpModel> EmpList
         {
             get { return _empList; }
 

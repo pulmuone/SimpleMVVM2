@@ -67,7 +67,7 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
-                    <local:DataGridHeader Text="사번" SortingEnabled="True" Grid.Row="0" Grid.Column="0" x:Name="H0" FieldName="EmpId" ViewModel="{x:Reference vm}">
+                    <local:DataGridHeader Text="사번" SortingEnabled="True" Grid.Row="0" Grid.Column="0" x:Name="H0" FieldName="EmpId">
                         <local:DataGridHeader.Behaviors>
                             <behaviors:EventToCommandBehavior
 								EventName="Clicked"

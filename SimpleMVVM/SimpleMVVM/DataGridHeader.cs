@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using SimpleMVVM.Sorting;
 
 namespace SimpleMVVM
 {
@@ -11,7 +12,7 @@ namespace SimpleMVVM
 
         public string FieldName { get; set; }
 
-        public bool SortFlag { get; set; }
+        public SortingOrder SortFlag { get; set; }
 
         public static readonly BindableProperty SortingEnabledProperty = BindableProperty.Create(nameof(SortingEnabled), typeof(bool), typeof(DataGridHeader), true);
 
@@ -21,11 +22,9 @@ namespace SimpleMVVM
             set { SetValue(SortingEnabledProperty, value); }
         }
 
-        public ViewModelBase ViewModel { get; set;}
-
         public DataGridHeader()
         {
-            ViewModel = new ViewModelBase();
+            //ViewModel = new ViewModelBase();
             var tapGestureRecognizer = new TapGestureRecognizer
             {
                 NumberOfTapsRequired = 1
@@ -39,11 +38,11 @@ namespace SimpleMVVM
 
             this.GestureRecognizers.Add(tapGestureRecognizer);
 
-            //EventToCommandBehavior etcb= new EventToCommandBehavior();
+            //EventToCommandBehavior etcb = new EventToCommandBehavior();
             //etcb.EventName = "Clicked";
-            //etcb.Command = ViewModel.SortedCommand;
+            //etcb.Command = (BindingContext as ViewModelBase).SortedCommand;
             //etcb.CommandParameter = this;
-            
+
             //this.Behaviors.Add(etcb);
         }
 

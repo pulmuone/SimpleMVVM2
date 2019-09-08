@@ -6,7 +6,7 @@ namespace SimpleMVVM
 {
     public class EmpModel
     {
-        public string EmpId { get; set; }
+        public int EmpId { get; set; }
         public string EmpName { get; set; }
         public string Addr { get; set; }
         public int Age { get; set; }

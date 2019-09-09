@@ -47,6 +47,11 @@ namespace SimpleMVVM
             Console.WriteLine(e.SortingEnabled);
             Console.WriteLine(e.FieldName);
 
+            if(!e.SortingEnabled)
+            {
+                return;
+            }
+
             SortingOrder sortMethod;
             
             if (e.SortFlag ==  SortingOrder.None || e.SortFlag == SortingOrder.Ascendant)

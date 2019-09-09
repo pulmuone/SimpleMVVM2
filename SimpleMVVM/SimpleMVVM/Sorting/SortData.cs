@@ -3,18 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Collections.ObjectModel;
+using SimpleMVVM.Controls;
 
 namespace SimpleMVVM.Sorting
 {
-    public class SortData
+    public static class SortData
     {
-
-        public SortData()
-        {
-
-        }
-
-        public void SortList<T>(ref List<T> lista, SortingOrder sort, string propertyToOrder)
+        public static void SortList<T>(ref List<T> lista, SortingOrder sort, string propertyToOrder)
         {
             if (!string.IsNullOrEmpty(propertyToOrder) && lista != null && lista.Count > 0)
             {

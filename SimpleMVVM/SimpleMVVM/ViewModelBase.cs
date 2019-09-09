@@ -5,14 +5,14 @@ using System.Windows.Input;
 
 namespace SimpleMVVM
 {
-    public class ViewModelBase : IViewModel
+    public class ViewModelBase
     {
+
+        public ICommand SortedCommand { get; set; }
 
         public ViewModelBase()
         {
             
         }
-
-        public ICommand SortedCommand { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace SimpleMVVM
         {
             InitializeComponent();
             //BindingContext = new EmpViewModel();
-            //this.H0.ViewModel = (this.BindingContext as EmpViewModel);
+            //this.H0.BindingContext = this.BindingContext;
 
 
             //this.EmpId.CursorPosition = 2;

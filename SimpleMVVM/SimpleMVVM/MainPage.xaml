@@ -37,7 +37,7 @@
         
         <Entry Placeholder="Name" Text="{Binding EmpName}"/>
 
-        <Button Text="입력" Command="{Binding SendCommand}"/>
+        <Button Text="조회" Command="{Binding SendCommand}"/>
 
         <Button Text="이동" x:Name="moveButton" Clicked="MoveButton_Clicked"/>
 
@@ -67,22 +67,10 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
 
-                    <local:DataGridHeader Text="사번" SortingEnabled="True" Grid.Row="0" Grid.Column="0" x:Name="H0" FieldName="EmpId">
-                        <local:DataGridHeader.Behaviors>
-                            <behaviors:EventToCommandBehavior
-								EventName="Clicked"
-								Command="{Binding SortedCommand}"
-								CommandParameter="{x:Reference H0}"/>
-                        </local:DataGridHeader.Behaviors>
-                    </local:DataGridHeader>
-                    <local:DataGridHeader Text="이름" SortingEnabled="False" Grid.Row="0" Grid.Column="1" x:Name="H1" />
-                    <local:DataGridHeader Text="주소" SortingEnabled="True" Grid.Row="0" Grid.Column="2" x:Name="H2" />
-                    <local:DataGridHeader Text="나이" SortingEnabled="False" Grid.Row="0" Grid.Column="3" x:Name="H3" />
-                    <!--<Grid.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="TapGestureRecognizer_Tapped" 
-                            NumberOfTapsRequired="1" />
-                    </Grid.GestureRecognizers>-->
+                    <local:DataGridHeader Text="사번" SortingEnabled="True" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" FieldName="EmpId" BindingContext="{x:Reference vm}"/>
+                    <local:DataGridHeader Text="이름" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="1" FieldName="EmpName" BindingContext="{x:Reference vm}"/>
+                    <local:DataGridHeader Text="주소" SortingEnabled="True" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="2" FieldName="Addr" BindingContext="{x:Reference vm}"/>
+                    <local:DataGridHeader Text="나이" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="3" FieldName="Age" BindingContext="{x:Reference vm}"/>
                 </Grid>
 
                 <CollectionView 
@@ -105,13 +93,9 @@
                                         <ColumnDefinition Width="300"/>
                                         <ColumnDefinition Width="100"/>
                                     </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{Binding EmpId}">
-                                    <!--<Label.GestureRecognizers>
-                                        <TapGestureRecognizer  NumberOfTapsRequired="2" Tapped="TapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>-->
-                                </Label>
-                                <Label Grid.Column="1" Text="{Binding EmpName}" />
-                                <Entry Grid.Column="2" x:Name="addrEntry" Text="{Binding Addr}" Focused="Entry_Focused"  />
+                                <Label Grid.Column="0" Text="{Binding EmpId}"/>
+                                <Label Grid.Column="1" Text="{Binding EmpName}"/>
+                                <Entry Grid.Column="2" x:Name="addrEntry" Text="{Binding Addr}" Focused="Entry_Focused" />
                                 <Label Grid.Column="3" Text="{Binding Age}" />
                                 </Grid>
                         </DataTemplate>
@@ -119,6 +103,5 @@
                 </CollectionView>
             </Grid>
         </ScrollView>
-    </StackLayout>
-    
+    </StackLayout>    
 </ContentPage>

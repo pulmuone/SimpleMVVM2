@@ -12,7 +12,7 @@ using SimpleMVVM.Controls;
 
 namespace SimpleMVVM
 {
-    public class EmpViewModel : ViewModelBase, INotifyPropertyChanged, IViewModel
+    public class EmpViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,8 +24,6 @@ namespace SimpleMVVM
         private string _empName;
 
         private EmpModel _selectedItem;
-
-        private SortData _sortData = new SortData();
 
         public ICommand SendCommand { get; } //생성자에서만 new할꺼면 private set없어도 된다.
 
@@ -41,7 +39,6 @@ namespace SimpleMVVM
 
             EmpId = "1234";
 
-            //EmpList = new ObservableCollection<EmpModel>();
         }
 
         private void Sorted(DataGridHeader e)
@@ -50,39 +47,24 @@ namespace SimpleMVVM
             Console.WriteLine(e.SortingEnabled);
             Console.WriteLine(e.FieldName);
 
-            Console.WriteLine("a");
-
-
-
-            //List<EmpModel> lst = _empList.ToList<EmpModel>();
-            List<EmpModel> lst;
-
             SortingOrder sortMethod;
-            if(e.SortFlag ==  SortingOrder.None || e.SortFlag == SortingOrder.Ascendant)
+            
+            if (e.SortFlag ==  SortingOrder.None || e.SortFlag == SortingOrder.Ascendant)
             {
                 sortMethod = SortingOrder.Descendant;
-                lst = EmpList.OrderBy(x => x.EmpId).ToList() ;
             }
             else
             {
                 sortMethod = SortingOrder.Ascendant;
-                lst = EmpList.OrderByDescending(x => x.EmpId).ToList();
             }
+
             e.SortFlag = sortMethod;
-            
+            List<EmpModel> lst = EmpList.ToList();
 
-            //_sortData.SortList(ref lst, e.SortFlag, e.FieldName);
-
-            //foreach (var item in _empList)
-            //{
-            //    Console.WriteLine(item.EmpId);
-            //}
-
-            //EmpList = new ObservableCollection<EmpModel>(lst);
+            SortData.SortList(ref lst, e.SortFlag, e.FieldName);
 
             EmpList.Clear();
             EmpList.AddRange(lst);
-
         }
 
         private void Return()
@@ -92,15 +74,11 @@ namespace SimpleMVVM
 
         private void Send()
         {
-            //Result = string.Format("ID : {0}, Name : {1}", EmpId, EmpName);
-
-
             EmpList.Clear();
             for (int i = 0; i < 100; i++)
             {
-                EmpList.Add(new EmpModel { EmpId = i, EmpName = "test", Addr = "addr", Age = 12, Money = 5000 });
+                EmpList.Add(new EmpModel { EmpId = i, EmpName = "test", Addr = i.ToString() + "addr", Age = i, Money = 5000 });
             }
-
 
             SelectedItem = EmpList.Skip(2).FirstOrDefault();
 

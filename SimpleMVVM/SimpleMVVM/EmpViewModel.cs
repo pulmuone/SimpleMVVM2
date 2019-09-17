@@ -28,7 +28,7 @@ namespace SimpleMVVM
         public ICommand SendCommand { get; } //생성자에서만 new할꺼면 private set없어도 된다.
 
         public ICommand ReturnValueCommand { get; }
-
+        
         //public ICommand SortedCommand { get; set; }
 
         public EmpViewModel()
@@ -36,7 +36,6 @@ namespace SimpleMVVM
             SendCommand = new Command(() => Send());
             ReturnValueCommand = new Command(() => Return());
             SortedCommand = new Command<DataGridHeader>(Sorted);
-
             EmpId = "1234";
 
         }

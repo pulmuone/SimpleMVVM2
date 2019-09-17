@@ -52,7 +52,8 @@ namespace SimpleMVVM
             //int previous = (e.PreviousSelection.FirstOrDefault() as EmpModel)?.EmpId;
             //int current = (e.CurrentSelection.FirstOrDefault() as EmpModel)?.EmpId;
 
-            this.collectionView.ScrollTo(30, 0, ScrollToPosition.Start, false);
+            //라인이동
+            //this.collectionView.ScrollTo(30, 0, ScrollToPosition.Start, false);
         }
 
         private void CollectionView_ScrollToRequested(object sender, ScrollToRequestEventArgs e)
@@ -71,5 +72,6 @@ namespace SimpleMVVM
         {
             Console.WriteLine("aa");
         }
+
     }
 }

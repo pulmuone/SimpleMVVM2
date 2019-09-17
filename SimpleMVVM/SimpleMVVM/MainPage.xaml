@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:SimpleMVVM.Behaviors"
              xmlns:local="clr-namespace:SimpleMVVM"
+             x:DataType="local:EmpViewModel"
              x:Class="SimpleMVVM.MainPage">
 
     <ContentPage.BindingContext>
@@ -85,7 +86,7 @@
                     SelectionChanged="CollectionView_SelectionChanged" 
                     ItemsSource="{Binding EmpList}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="local:EmpModel">
                                 <Grid ColumnSpacing="0" RowSpacing="0" HeightRequest="40">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="80"/>

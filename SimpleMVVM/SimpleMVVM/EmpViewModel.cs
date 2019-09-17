@@ -67,9 +67,10 @@ namespace SimpleMVVM
             List<EmpModel> lst = EmpList.ToList();
 
             SortData.SortList(ref lst, e.SortFlag, e.FieldName);
-
             EmpList.Clear();
             EmpList.AddRange(lst);
+
+            lst.Clear();
         }
 
         private void Return()

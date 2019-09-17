@@ -40,6 +40,7 @@ namespace SimpleMVVM
         private void MinusButton()
         {
             Age -= 1;
+
         }
 
         private void PlusButton()

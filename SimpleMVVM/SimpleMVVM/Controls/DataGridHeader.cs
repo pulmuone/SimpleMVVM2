@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using SimpleMVVM.Sorting;
+using SimpleMVVM.ViewModels;
 
-namespace SimpleMVVM
+namespace SimpleMVVM.Controls
 {
     public class DataGridHeader : Label
     {

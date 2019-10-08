@@ -9,10 +9,12 @@ using Xamarin.Forms;
 using System.Linq;
 using SimpleMVVM.Sorting;
 using SimpleMVVM.Controls;
+using SimpleMVVM.Models;
+using SimpleMVVM.ViewModels;
 
-namespace SimpleMVVM
+namespace SimpleMVVM.ViewModels
 {
-    public class EmpViewModel : ViewModelBase, INotifyPropertyChanged
+    public class EmpViewModel : ViewModelBase
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -36,7 +38,23 @@ namespace SimpleMVVM
             SendCommand = new Command(() => Send());
             ReturnValueCommand = new Command(() => Return());
             SortedCommand = new Command<DataGridHeader>(Sorted);
-            EmpId = "1234";
+
+            List<EmpModel> Employees = new List<EmpModel>()
+            {
+                new EmpModel {EmpId = 1,  EmpName = "첫번째", Addr="주소, 첫번재", Age = 11, Grade = new ComboBoxModel() {Code="001", Name= "1학년" }},
+                new EmpModel {EmpId = 2,  EmpName = "두번째", Addr="주소, 두번째", Age = 12, Grade = new ComboBoxModel() {Code="002", Name= "2학년" }},
+                new EmpModel {EmpId = 3,  EmpName = "세번째", Addr="주소, 세번째", Age = 13, Grade = new ComboBoxModel() {Code="003", Name= "3학년" }},
+                new EmpModel {EmpId = 4,  EmpName = "네번째", Addr="주소, 네번째", Age = 14, Grade = new ComboBoxModel() {Code="004", Name= "4학년" }},
+                new EmpModel {EmpId = 5,  EmpName = "다섯번째", Addr="주소, 다섯번째", Age = 15, Grade = new ComboBoxModel() {Code="001", Name= "1학년" }},
+                new EmpModel {EmpId = 6,  EmpName = "여섯번째", Addr="주소, 여섯번째", Age = 16, Grade = new ComboBoxModel() {Code="002", Name= "2학년" }},
+                new EmpModel {EmpId = 7,  EmpName = "여섯번째", Addr="주소, 일곱번째", Age = 17, Grade = new ComboBoxModel() {Code="003", Name= "3학년" }},
+                new EmpModel {EmpId = 8,  EmpName = "여덟번째", Addr="주소, 여덟번째", Age = 18, Grade = new ComboBoxModel() {Code="004", Name= "4학년" }},
+                new EmpModel {EmpId = 9,  EmpName = "아홉번째", Addr="주소, 아홉번째", Age = 19, Grade = new ComboBoxModel() {Code="001", Name= "1학년" }},
+                new EmpModel {EmpId = 10,  EmpName = "열번째", Addr="주소, 열번째", Age = 20, Grade = new ComboBoxModel() {Code="002", Name= "2학년" }}
+            };
+
+            EmpList.AddRange(Employees);
+
 
         }
 
@@ -79,13 +97,13 @@ namespace SimpleMVVM
 
         private void Send()
         {
-            EmpList.Clear();
-            for (int i = 0; i < 100; i++)
-            {
-                EmpList.Add(new EmpModel { EmpId = i, EmpName = "test", Addr = i.ToString() + "addr", Age = i, Money = 5000 });
-            }
+            //EmpList.Clear();
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    EmpList.Add(new EmpModel { EmpId = i, EmpName = "test", Addr = i.ToString() + "addr", Age = i, Money = 5000 });
+            //}
 
-            SelectedItem = EmpList.Skip(2).FirstOrDefault();
+            //SelectedItem = EmpList.Skip(2).FirstOrDefault();
 
             //EmpList.Add(new EmpModel
             //    {

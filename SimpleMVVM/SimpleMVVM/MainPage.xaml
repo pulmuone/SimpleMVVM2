@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:SimpleMVVM.Behaviors"
-             xmlns:local="clr-namespace:SimpleMVVM"
-             x:DataType="local:EmpViewModel"
+             xmlns:vm="clr-namespace:SimpleMVVM.ViewModels"
+             xmlns:model="clr-namespace:SimpleMVVM.Models"
+             xmlns:controls="clr-namespace:SimpleMVVM.Controls"
+             x:DataType="vm:EmpViewModel"
              x:Class="SimpleMVVM.MainPage">
 
     <ContentPage.BindingContext>
-        <local:EmpViewModel x:Name="vm"/>
+        <vm:EmpViewModel x:Name="vm"/>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
@@ -57,25 +59,24 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid x:Name="HeaderGrid"
-                      Grid.Row="0"
-                      RowSpacing="0" 
-                      ColumnSpacing="0">
+                <Grid x:Name="HeaderGrid" Grid.Row="0" RowSpacing="0"  ColumnSpacing="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <local:DataGridHeader Text="사번" SortingEnabled="True" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" FieldName="EmpId" BindingContext="{x:Reference vm}"/>
-                    <local:DataGridHeader Text="이름" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="1" FieldName="EmpName" BindingContext="{x:Reference vm}"/>
-                    <local:DataGridHeader Text="주소" SortingEnabled="True" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="2" FieldName="Addr" BindingContext="{x:Reference vm}"/>
-                    <local:DataGridHeader Text="-" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="3" />
-                    <local:DataGridHeader Text="나이" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="4" FieldName="Age" BindingContext="{x:Reference vm}"/>
-                    <local:DataGridHeader Text="+" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="5" />
+                    <controls:DataGridHeader Text="사번" SortingEnabled="True" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" FieldName="EmpId" BindingContext="{x:Reference vm}"/>
+                    <controls:DataGridHeader Text="이름" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="1" FieldName="EmpName" BindingContext="{x:Reference vm}"/>
+                    <controls:DataGridHeader Text="주소" SortingEnabled="True" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="2" FieldName="Addr" BindingContext="{x:Reference vm}"/>
+                    <controls:DataGridHeader Text="-" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="3" />
+                    <controls:DataGridHeader Text="나이" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="4" FieldName="Age" BindingContext="{x:Reference vm}"/>
+                    <controls:DataGridHeader Text="+" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="5" />
+                    <controls:DataGridHeader Text="학년" SortingEnabled="False" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="6" />
                 </Grid>
 
                 <CollectionView 
@@ -89,22 +90,28 @@
                     SelectionChanged="CollectionView_SelectionChanged" 
                     ItemsSource="{Binding EmpList}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="local:EmpModel">
+                        <DataTemplate x:DataType="model:EmpModel">
                                 <Grid ColumnSpacing="0" RowSpacing="0" HeightRequest="40">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="80"/>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{Binding EmpId}"/>
-                                <Label Grid.Column="1" Text="{Binding EmpName}"/>
-                                <Entry Grid.Column="2" x:Name="addrEntry" Text="{Binding Addr}" Focused="Entry_Focused" />
+                                <Label Grid.Column="0" Text="{Binding EmpId}" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="1" Text="{Binding EmpName}" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="{Binding Addr}"/>
                                 <Button Grid.Column="3" Text="-"  Command="{Binding MinusButtonCommand}"/>
                                 <Entry Grid.Column="4" Text="{Binding Age}"  Keyboard="Numeric" HorizontalTextAlignment="Center"/>
                                 <Button Grid.Column="5" Text="+"  Command="{Binding PlusButtonCommand}"/>
+                                <Picker Grid.Column="6"  
+                                        Title="등급"
+                                        ItemsSource="{Binding Grades}"
+                                        ItemDisplayBinding="{Binding Name}"
+                                        SelectedItem="{Binding Grade}" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

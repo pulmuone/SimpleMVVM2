@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace SimpleMVVM
+namespace SimpleMVVM.Models
 {
     public class EmpModel  : BindableObject
     {
@@ -16,7 +16,27 @@ namespace SimpleMVVM
         public string Addr { get; set; }
 
         private int _age;
-        public int Age 
+        
+        public ComboBoxModel Grade { get; set; }
+
+        public List<ComboBoxModel> Grades { get; set; }
+
+        public EmpModel()
+        {
+            PlusButtonCommand = new Command(() => PlusButton());
+            MinusButtonCommand = new Command(() => MinusButton());
+
+
+            Grades = new List<ComboBoxModel>
+            {
+                new ComboBoxModel {Code="001", Name="1학년"},
+                new ComboBoxModel {Code="002", Name="2학년"},
+                new ComboBoxModel {Code="003", Name="3학년"},
+                new ComboBoxModel {Code="004", Name="4학년"}
+            };
+        }
+
+        public int Age
         {
             get { return this._age; }
             set
@@ -27,20 +47,9 @@ namespace SimpleMVVM
             }
         }
 
-        public int Money { get; set; }
-
-
-        public EmpModel()
-        {
-            PlusButtonCommand = new Command(() => PlusButton());
-            MinusButtonCommand = new Command(() => MinusButton());
-        }
-
-        
         private void MinusButton()
         {
             Age -= 1;
-
         }
 
         private void PlusButton()

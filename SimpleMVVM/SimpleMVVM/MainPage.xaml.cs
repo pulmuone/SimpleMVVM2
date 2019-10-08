@@ -58,8 +58,6 @@ namespace SimpleMVVM
 
         private void CollectionView_ScrollToRequested(object sender, ScrollToRequestEventArgs e)
         {
-            
-            
             Console.WriteLine("ScrollToRequested : " + e.Index);
          }
 

@@ -56,12 +56,12 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid x:Name="HeaderGrid" Grid.Row="0" RowSpacing="0"  ColumnSpacing="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="70"/>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="50"/>
@@ -93,7 +93,7 @@
                         <DataTemplate x:DataType="model:EmpModel">
                                 <Grid ColumnSpacing="0" RowSpacing="0" HeightRequest="40">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="70"/>
                                         <ColumnDefinition Width="100"/>
                                         <ColumnDefinition Width="150"/>
                                         <ColumnDefinition Width="50"/>
@@ -101,17 +101,17 @@
                                         <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="80"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{Binding EmpId}" HorizontalTextAlignment="Center"/>
-                                <Label Grid.Column="1" Text="{Binding EmpName}" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="0" Text="{Binding EmpId}" />
+                                <Label Grid.Column="1" Text="{Binding EmpName}" HorizontalOptions="Center" />
                                 <Label Grid.Column="2" Text="{Binding Addr}"/>
                                 <Button Grid.Column="3" Text="-"  Command="{Binding MinusButtonCommand}"/>
-                                <Entry Grid.Column="4" Text="{Binding Age}"  Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+                                <Entry Grid.Column="4" Text="{Binding Age}"  Keyboard="Numeric" />
                                 <Button Grid.Column="5" Text="+"  Command="{Binding PlusButtonCommand}"/>
                                 <Picker Grid.Column="6"  
                                         Title="등급"
                                         ItemsSource="{Binding Grades}"
                                         ItemDisplayBinding="{Binding Name}"
-                                        SelectedItem="{Binding Grade}" />
+                                        SelectedItem="{Binding Grade}"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

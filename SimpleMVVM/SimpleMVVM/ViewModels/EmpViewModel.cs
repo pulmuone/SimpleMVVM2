@@ -95,12 +95,10 @@ namespace SimpleMVVM.ViewModels
 
             SortData.SortList(ref lst, e.SortFlag, e.FieldName);
             EmpList.Clear();
-            EmpList.AddRange(lst);
+            EmpList.AddRange(lst, System.Collections.Specialized.NotifyCollectionChangedAction.Reset);
             //EmpList = new ObservableRangeCollection<EmpModel>(lst);
                        
             lst.Clear();
-
-
         }
 
         private void Return()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleMVVM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,10 @@ namespace SimpleMVVM
         public MainPage()
         {
             InitializeComponent();
-            //BindingContext = new EmpViewModel();
             //this.H0.BindingContext = this.BindingContext;
-
 
             //this.EmpId.CursorPosition = 2;
             //this.EmpId.SelectionLength = 2;
-
         }
 
         private void MoveButton_Clicked(object sender, EventArgs e)

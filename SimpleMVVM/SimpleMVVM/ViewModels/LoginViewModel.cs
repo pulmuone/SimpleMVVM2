@@ -21,7 +21,7 @@ namespace SimpleMVVM.ViewModels
         private string _password = string.Empty;
         private ObservableRangeCollection<WarehouseModel> _warehouseList = new ObservableRangeCollection<WarehouseModel>();
 
-        public ICommand LoginCommand { get; }
+        public ICommand LoginCommand { get; private set;}
 
         public LoginViewModel()
         {
@@ -38,13 +38,14 @@ namespace SimpleMVVM.ViewModels
             LoginCommand = new Command(async()=>await Login(), ()=> IsControlEnable);
             //LoginCommand = new Command(async () => await Login());
 
+
         }
 
         private async Task Login()
         {
             bool result;
-            IsControlEnable = false;
             IsBusy = true;
+            IsControlEnable = false;
             (LoginCommand as Command).ChangeCanExecute();
 
             Console.WriteLine("Clicked Count : {0}", ClickCount++);
@@ -67,7 +68,8 @@ namespace SimpleMVVM.ViewModels
         private bool LoginProcess()
         {
             // Simulate a 5 second pause
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
+            //db연결
 
             return true;
 

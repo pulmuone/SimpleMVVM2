@@ -1,4 +1,5 @@
-﻿using SimpleMVVM.ViewModels;
+﻿using SimpleMVVM.Models;
+using SimpleMVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,5 +70,24 @@ namespace SimpleMVVM
             Console.WriteLine("aa");
         }
 
+        private void AgeEntry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void AgeEntry_Unfocused(object sender, FocusEventArgs e)
+        {
+            this.collectionView.SelectedItem = null;
+        }
+
+        private void AgeEntry_Focused(object sender, FocusEventArgs e)
+        {
+            Console.WriteLine(e.ToString());
+
+            Console.WriteLine("==> " + ((Entry)sender).ReturnCommandParameter);
+
+            EmpModel selectedItem = (EmpModel)(BindingContext as EmpViewModel).EmpList.Where(i => i.EmpId == (int)((Entry)sender).ReturnCommandParameter).FirstOrDefault();
+            this.collectionView.SelectedItem = selectedItem;
+        }
     }
 }

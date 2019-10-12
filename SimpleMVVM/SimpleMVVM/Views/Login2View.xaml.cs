@@ -10,11 +10,18 @@ using Xamarin.Forms.Xaml;
 namespace SimpleMVVM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class InboundItemsView : ContentPage
+    public partial class Login2View : ContentPage
     {
-        public InboundItemsView()
+        public Login2View()
         {
             InitializeComponent();
+        }
+
+        private void PasswdEntry_Completed(object sender, EventArgs e)
+        {
+            Console.WriteLine( this.PasswdEntry.Text);
+            Console.WriteLine((sender as Entry).Text);
+
 
         }
     }

@@ -105,7 +105,16 @@
                                 <Label Grid.Column="1" Text="{Binding EmpName}" HorizontalOptions="Center" />
                                 <Label Grid.Column="2" Text="{Binding Addr}"/>
                                 <Button Grid.Column="3" Text="-"  Command="{Binding MinusButtonCommand}"/>
-                                <Entry Grid.Column="4" Text="{Binding Age}"  Keyboard="Numeric" />
+                                <Entry 
+                                    x:Name="AgeEntry"
+                                    Grid.Column="4" 
+                                    Text="{Binding Age}"  
+                                    Keyboard="Numeric" 
+                                    ReturnCommandParameter="{Binding EmpId}"
+                                    TextChanged ="AgeEntry_TextChanged"
+                                    Unfocused="AgeEntry_Unfocused"
+                                    Focused="AgeEntry_Focused"
+                                    />
                                 <Button Grid.Column="5" Text="+"  Command="{Binding PlusButtonCommand}"/>
                                 <Picker Grid.Column="6"  
                                         Title="등급"

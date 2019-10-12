@@ -12,8 +12,9 @@ namespace SimpleMVVM
 
             InitializeComponent();
 
-            //MainPage = new MainPage();
-            MainPage = new NavigationPage(new Views.LoginView());
+            MainPage = new MainPage();
+            //MainPage = new NavigationPage(new Views.LoginView());
+            //MainPage = new NavigationPage(new Views.Login2View());
         }
 
         protected override void OnStart()
